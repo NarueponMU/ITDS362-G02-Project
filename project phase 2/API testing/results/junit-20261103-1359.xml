@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="8" skipped="0" tests="46" time="22.086" timestamp="2026-11-03T13:59:30.286128+07:00" hostname="Naruepons-MacBook-Air.local"><testcase classname="test_cart_add_item" name="test_add_simple_product_with_valid_quantity[C2-min-1]" time="0.668" /><testcase classname="test_cart_add_item" name="test_add_simple_product_with_valid_quantity[C2-typical-3]" time="0.618" /><testcase classname="test_cart_add_item" name="test_add_simple_product_with_valid_quantity[C2-max-9999]" time="0.440" /><testcase classname="test_cart_add_item" name="test_add_without_quantity_defaults_to_one" time="0.435" /><testcase classname="test_cart_add_item" name="test_add_same_product_twice_merges_lines" time="0.576" /><testcase classname="test_cart_add_item" name="test_add_with_non_positive_quantity_is_rejected[C2-zero]" time="0.295" /><testcase classname="test_cart_add_item" name="test_add_with_non_positive_quantity_is_rejected[C2-negative]" time="0.319" /><testcase classname="test_cart_add_item" name="test_add_with_non_numeric_quantity_is_rejected" time="0.374" /><testcase classname="test_cart_add_item" name="test_add_with_quantity_above_max_is_rejected" time="0.313"><failure message="assert 201 == 400&#10; +  where 201 = &lt;Response [201]&gt;.status_code">cart = &lt;conftest.StoreCart object at 0x1075fd250&gt;
+
+    def test_add_with_quantity_above_max_is_rejected(cart):
+        r = cart.add_item({"id": SIMPLE_PRODUCT_ID, "quantity": MAX_QUANTITY + 1})
+&gt;       assert r.status_code == 400
+E       assert 201 == 400
+E        +  where 201 = &lt;Response [201]&gt;.status_code
+
+test_cart_add_item.py:88: AssertionError</failure></testcase><testcase classname="test_cart_add_item" name="test_add_with_decimal_quantity_is_rejected" time="0.413"><failure message="assert 201 == 400&#10; +  where 201 = &lt;Response [201]&gt;.status_code">cart = &lt;conftest.StoreCart object at 0x1075fcf50&gt;
+
+    def test_add_with_decimal_quantity_is_rejected(cart):
+        r = cart.add_item({"id": SIMPLE_PRODUCT_ID, "quantity": 2.5})
+&gt;       assert r.status_code == 400
+E       assert 201 == 400
+E        +  where 201 = &lt;Response [201]&gt;.status_code
+
+test_cart_add_item.py:95: AssertionError</failure></testcase><testcase classname="test_cart_add_item" name="test_add_invalid_product_id_is_rejected[C1-non-existent]" time="0.304" /><testcase classname="test_cart_add_item" name="test_add_invalid_product_id_is_rejected[C1-zero-id]" time="0.258" /><testcase classname="test_cart_add_item" name="test_add_invalid_product_id_is_rejected[C1-missing-id]" time="0.517" /><testcase classname="test_cart_add_item" name="test_add_variable_product_without_attributes_is_rejected" time="0.336" /><testcase classname="test_cart_add_item" name="test_add_non_purchasable_product_is_rejected[C1-external]" time="0.317" /><testcase classname="test_cart_add_item" name="test_add_non_purchasable_product_is_rejected[C1-grouped]" time="0.567" /><testcase classname="test_cart_add_item" name="test_add_without_cart_token_is_unauthorized" time="0.260" /><testcase classname="test_cart_update_item" name="test_update_to_valid_quantity[C2-increase-5]" time="0.687" /><testcase classname="test_cart_update_item" name="test_update_to_valid_quantity[C2-min-1]" time="0.767" /><testcase classname="test_cart_update_item" name="test_update_to_valid_quantity[C2-max-9999]" time="1.046" /><testcase classname="test_cart_update_item" name="test_update_without_quantity_keeps_quantity" time="0.673" /><testcase classname="test_cart_update_item" name="test_update_to_out_of_range_quantity_is_rejected[C2-zero]" time="0.666" /><testcase classname="test_cart_update_item" name="test_update_to_out_of_range_quantity_is_rejected[C2-negative]" time="0.958" /><testcase classname="test_cart_update_item" name="test_update_to_out_of_range_quantity_is_rejected[C2-above-max-10000]" time="0.766" /><testcase classname="test_cart_update_item" name="test_update_to_non_numeric_quantity_is_rejected" time="0.557" /><testcase classname="test_cart_update_item" name="test_update_to_decimal_quantity_is_rejected" time="0.837"><failure message="assert 200 == 400&#10; +  where 200 = &lt;Response [200]&gt;.status_code">cart_with_item = (&lt;conftest.StoreCart object at 0x1075e3540&gt;, {'id': 16, 'name': 'Cap', 'slug': 'cap', 'parent': 0, ...}, 'c74d97b01eae257e44aa9d5bade97baf')
+
+    def test_update_to_decimal_quantity_is_rejected(cart_with_item):
+        cart, _, key = cart_with_item
+        r = cart.update_item({"key": key, "quantity": 2.7})
+&gt;       assert r.status_code == 400
+E       assert 200 == 400
+E        +  where 200 = &lt;Response [200]&gt;.status_code
+
+test_cart_update_item.py:85: AssertionError</failure></testcase><testcase classname="test_cart_update_item" name="test_update_with_invalid_key_is_rejected[C1-non-existent-key]" time="1.050" /><testcase classname="test_cart_update_item" name="test_update_with_invalid_key_is_rejected[C1-missing-key]" time="0.576" /><testcase classname="test_cart_update_item" name="test_update_with_key_from_another_cart_is_rejected" time="0.960" /><testcase classname="test_products_list" name="test_search_matching_keyword_returns_only_matching_products[C1-lowercase]" time="0.193" /><testcase classname="test_products_list" name="test_search_matching_keyword_returns_only_matching_products[C1-uppercase]" time="0.199" /><testcase classname="test_products_list" name="test_search_no_match_returns_empty_list" time="0.144" /><testcase classname="test_products_list" name="test_search_empty_keyword_returns_all_products" time="0.609" /><testcase classname="test_products_list" name="test_price_range_returns_every_product_in_range" time="0.602"><failure message="AssertionError: assert {16, 22} == {10, 13, 14, 16, 21, 22, ...}&#10;  &#10;  Extra items in the right set:&#10;  32&#10;  33&#10;  10&#10;  13&#10;  14...&#10;  &#10;  ...Full output truncated, use '-vv' to show">session = &lt;requests.sessions.Session object at 0x1076ed440&gt;
+all_products = [{'id': 33, 'name': 'WordPress Pennant', 'slug': 'wordpress-pennant', 'parent': 0, ...}, {'id': 32, 'name': 'Logo Coll...e': 'Single', 'slug': 'single', 'parent': 0, ...}, {'id': 22, 'name': 'Album', 'slug': 'album', 'parent': 0, ...}, ...]
+
+    def test_price_range_returns_every_product_in_range(session, all_products):
+        low, high = 1000, 2000
+        r = list_products(session, min_price=low, max_price=high, per_page=100)
+        assert r.status_code == 200
+        returned = {p["id"] for p in r.json()}
+        expected = {p["id"] for p in all_products if low &lt;= price_of(p) &lt;= high}
+        assert all(low &lt;= price_of(p) &lt;= high for p in r.json())
+&gt;       assert returned == expected
+E       AssertionError: assert {16, 22} == {10, 13, 14, 16, 21, 22, ...}
+E         
+E         Extra items in the right set:
+E         32
+E         33
+E         10
+E         13
+E         14...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+test_products_list.py:64: AssertionError</failure></testcase><testcase classname="test_products_list" name="test_price_range_min_greater_than_max_returns_empty" time="0.145" /><testcase classname="test_products_list" name="test_price_negative_min_returns_all_products" time="0.614"><failure message="AssertionError: assert {15, 16, 22} == {10, 11, 12, 13, 14, 15, ...}&#10;  &#10;  Extra items in the right set:&#10;  10&#10;  11&#10;  12&#10;  13&#10;  14...&#10;  &#10;  ...Full output truncated, use '-vv' to show">session = &lt;requests.sessions.Session object at 0x1076ee6d0&gt;
+all_products = [{'id': 33, 'name': 'WordPress Pennant', 'slug': 'wordpress-pennant', 'parent': 0, ...}, {'id': 32, 'name': 'Logo Coll...e': 'Single', 'slug': 'single', 'parent': 0, ...}, {'id': 22, 'name': 'Album', 'slug': 'album', 'parent': 0, ...}, ...]
+
+    def test_price_negative_min_returns_all_products(session, all_products):
+        r = list_products(session, min_price=-100, per_page=100)
+        assert r.status_code == 200
+&gt;       assert {p["id"] for p in r.json()} == {p["id"] for p in all_products}
+E       AssertionError: assert {15, 16, 22} == {10, 11, 12, 13, 14, 15, ...}
+E         
+E         Extra items in the right set:
+E         10
+E         11
+E         12
+E         13
+E         14...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+test_products_list.py:78: AssertionError</failure></testcase><testcase classname="test_products_list" name="test_price_non_numeric_min_is_rejected" time="0.246"><failure message="assert 500 == 400&#10; +  where 500 = &lt;Response [500]&gt;.status_code">session = &lt;requests.sessions.Session object at 0x1076eeba0&gt;
+
+    def test_price_non_numeric_min_is_rejected(session):
+        r = list_products(session, min_price="abc")
+&gt;       assert r.status_code == 400
+E       assert 500 == 400
+E        +  where 500 = &lt;Response [500]&gt;.status_code
+
+test_products_list.py:84: AssertionError</failure></testcase><testcase classname="test_products_list" name="test_per_page_valid_boundaries[C3-min-1]" time="0.231" /><testcase classname="test_products_list" name="test_per_page_valid_boundaries[C3-max-100]" time="0.363" /><testcase classname="test_products_list" name="test_per_page_invalid_boundaries[C3-below-min-0]" time="0.204" /><testcase classname="test_products_list" name="test_per_page_invalid_boundaries[C3-above-max-101]" time="0.169" /><testcase classname="test_products_list" name="test_order_by_price_is_sorted[C4-price-asc]" time="0.293"><failure message="AssertionError: assert [3500, 4500, ...00, 2000, ...] == [200, 1500, 1...00, 1800, ...]&#10;  &#10;  At index 0 diff: 3500 != 200&#10;  &#10;  Full diff: (-: missing in left side, +: extra in left side)&#10;    [&#10;  +     3500,&#10;  +     4500,...&#10;  &#10;  ...Full output truncated, use '-vv' to show">session = &lt;requests.sessions.Session object at 0x1076eee60&gt;, order = 'asc'
+
+    @pytest.mark.parametrize("order", ["asc", "desc"], ids=["C4-price-asc", "C4-price-desc"])
+    def test_order_by_price_is_sorted(session, order):
+        r = list_products(session, orderby="price", order=order, per_page=100, type="simple")
+        assert r.status_code == 200
+        prices = [price_of(p) for p in r.json()]
+&gt;       assert prices == sorted(prices, reverse=(order == "desc"))
+E       AssertionError: assert [3500, 4500, ...00, 2000, ...] == [200, 1500, 1...00, 1800, ...]
+E         
+E         At index 0 diff: 3500 != 200
+E         
+E         Full diff: (-: missing in left side, +: extra in left side)
+E           [
+E         +     3500,
+E         +     4500,...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+test_products_list.py:119: AssertionError</failure></testcase><testcase classname="test_products_list" name="test_order_by_price_is_sorted[C4-price-desc]" time="0.394"><failure message="AssertionError: assert [5500, 1600, ...00, 9000, ...] == [9000, 5500, ...00, 2500, ...]&#10;  &#10;  At index 0 diff: 5500 != 9000&#10;  &#10;  Full diff: (-: missing in left side, +: extra in left side)&#10;    [&#10;  +     5500,&#10;  +     1600,...&#10;  &#10;  ...Full output truncated, use '-vv' to show">session = &lt;requests.sessions.Session object at 0x1076ef8b0&gt;, order = 'desc'
+
+    @pytest.mark.parametrize("order", ["asc", "desc"], ids=["C4-price-asc", "C4-price-desc"])
+    def test_order_by_price_is_sorted(session, order):
+        r = list_products(session, orderby="price", order=order, per_page=100, type="simple")
+        assert r.status_code == 200
+        prices = [price_of(p) for p in r.json()]
+&gt;       assert prices == sorted(prices, reverse=(order == "desc"))
+E       AssertionError: assert [5500, 1600, ...00, 9000, ...] == [9000, 5500, ...00, 2500, ...]
+E         
+E         At index 0 diff: 5500 != 9000
+E         
+E         Full diff: (-: missing in left side, +: extra in left side)
+E           [
+E         +     5500,
+E         +     1600,...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+test_products_list.py:119: AssertionError</failure></testcase><testcase classname="test_products_list" name="test_order_by_invalid_value_is_rejected" time="0.176" /><testcase classname="test_products_list" name="test_category_existing_returns_only_that_category" time="0.578" /><testcase classname="test_products_list" name="test_category_non_existent_returns_empty" time="0.197" /></testsuite></testsuites>

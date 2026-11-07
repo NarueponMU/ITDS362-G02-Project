@@ -1,0 +1,13 @@
+# Only the "project phase 2" folder goes into the repo.
+# Course files at this level (account list, PDFs, notes) stay local.
+/*
+!/.gitignore
+!/project phase 2/
+
+# Never commit credentials or local tooling
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+.DS_Store
+~$*

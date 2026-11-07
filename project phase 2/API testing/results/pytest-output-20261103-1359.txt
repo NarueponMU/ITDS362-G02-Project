@@ -1,0 +1,206 @@
+Run at: 2026-11-03 13:59:30 +07
+============================= test session starts ==============================
+platform darwin -- Python 3.13.9, pytest-9.2.0, pluggy-1.7.0 -- /Users/naruepon/Desktop/QA_ProjectPhrase2/.venv/bin/python3
+cachedir: .pytest_cache
+metadata: {'Python': '3.13.9', 'Platform': 'macOS-27.2-arm64-arm-64bit-Mach-O', 'Packages': {'pytest': '9.2.0', 'pluggy': '1.7.0'}, 'Plugins': {'metadata': '3.1.1', 'html': '4.2.0'}}
+rootdir: /Users/naruepon/Desktop/QA_ProjectPhrase2/project phase 2/API testing
+configfile: pytest.ini
+testpaths: .
+plugins: metadata-3.1.1, html-4.2.0
+collecting ... collected 46 items
+
+test_cart_add_item.py::test_add_simple_product_with_valid_quantity[C2-min-1] PASSED [  2%]
+test_cart_add_item.py::test_add_simple_product_with_valid_quantity[C2-typical-3] PASSED [  4%]
+test_cart_add_item.py::test_add_simple_product_with_valid_quantity[C2-max-9999] PASSED [  6%]
+test_cart_add_item.py::test_add_without_quantity_defaults_to_one PASSED  [  8%]
+test_cart_add_item.py::test_add_same_product_twice_merges_lines PASSED   [ 10%]
+test_cart_add_item.py::test_add_with_non_positive_quantity_is_rejected[C2-zero] PASSED [ 13%]
+test_cart_add_item.py::test_add_with_non_positive_quantity_is_rejected[C2-negative] PASSED [ 15%]
+test_cart_add_item.py::test_add_with_non_numeric_quantity_is_rejected PASSED [ 17%]
+test_cart_add_item.py::test_add_with_quantity_above_max_is_rejected FAILED [ 19%]
+test_cart_add_item.py::test_add_with_decimal_quantity_is_rejected FAILED [ 21%]
+test_cart_add_item.py::test_add_invalid_product_id_is_rejected[C1-non-existent] PASSED [ 23%]
+test_cart_add_item.py::test_add_invalid_product_id_is_rejected[C1-zero-id] PASSED [ 26%]
+test_cart_add_item.py::test_add_invalid_product_id_is_rejected[C1-missing-id] PASSED [ 28%]
+test_cart_add_item.py::test_add_variable_product_without_attributes_is_rejected PASSED [ 30%]
+test_cart_add_item.py::test_add_non_purchasable_product_is_rejected[C1-external] PASSED [ 32%]
+test_cart_add_item.py::test_add_non_purchasable_product_is_rejected[C1-grouped] PASSED [ 34%]
+test_cart_add_item.py::test_add_without_cart_token_is_unauthorized PASSED [ 36%]
+test_cart_update_item.py::test_update_to_valid_quantity[C2-increase-5] PASSED [ 39%]
+test_cart_update_item.py::test_update_to_valid_quantity[C2-min-1] PASSED [ 41%]
+test_cart_update_item.py::test_update_to_valid_quantity[C2-max-9999] PASSED [ 43%]
+test_cart_update_item.py::test_update_without_quantity_keeps_quantity PASSED [ 45%]
+test_cart_update_item.py::test_update_to_out_of_range_quantity_is_rejected[C2-zero] PASSED [ 47%]
+test_cart_update_item.py::test_update_to_out_of_range_quantity_is_rejected[C2-negative] PASSED [ 50%]
+test_cart_update_item.py::test_update_to_out_of_range_quantity_is_rejected[C2-above-max-10000] PASSED [ 52%]
+test_cart_update_item.py::test_update_to_non_numeric_quantity_is_rejected PASSED [ 54%]
+test_cart_update_item.py::test_update_to_decimal_quantity_is_rejected FAILED [ 56%]
+test_cart_update_item.py::test_update_with_invalid_key_is_rejected[C1-non-existent-key] PASSED [ 58%]
+test_cart_update_item.py::test_update_with_invalid_key_is_rejected[C1-missing-key] PASSED [ 60%]
+test_cart_update_item.py::test_update_with_key_from_another_cart_is_rejected PASSED [ 63%]
+test_products_list.py::test_search_matching_keyword_returns_only_matching_products[C1-lowercase] PASSED [ 65%]
+test_products_list.py::test_search_matching_keyword_returns_only_matching_products[C1-uppercase] PASSED [ 67%]
+test_products_list.py::test_search_no_match_returns_empty_list PASSED    [ 69%]
+test_products_list.py::test_search_empty_keyword_returns_all_products PASSED [ 71%]
+test_products_list.py::test_price_range_returns_every_product_in_range FAILED [ 73%]
+test_products_list.py::test_price_range_min_greater_than_max_returns_empty PASSED [ 76%]
+test_products_list.py::test_price_negative_min_returns_all_products FAILED [ 78%]
+test_products_list.py::test_price_non_numeric_min_is_rejected FAILED     [ 80%]
+test_products_list.py::test_per_page_valid_boundaries[C3-min-1] PASSED   [ 82%]
+test_products_list.py::test_per_page_valid_boundaries[C3-max-100] PASSED [ 84%]
+test_products_list.py::test_per_page_invalid_boundaries[C3-below-min-0] PASSED [ 86%]
+test_products_list.py::test_per_page_invalid_boundaries[C3-above-max-101] PASSED [ 89%]
+test_products_list.py::test_order_by_price_is_sorted[C4-price-asc] FAILED [ 91%]
+test_products_list.py::test_order_by_price_is_sorted[C4-price-desc] FAILED [ 93%]
+test_products_list.py::test_order_by_invalid_value_is_rejected PASSED    [ 95%]
+test_products_list.py::test_category_existing_returns_only_that_category PASSED [ 97%]
+test_products_list.py::test_category_non_existent_returns_empty PASSED   [100%]
+
+=================================== FAILURES ===================================
+_________________ test_add_with_quantity_above_max_is_rejected _________________
+
+cart = <conftest.StoreCart object at 0x1075fd250>
+
+    def test_add_with_quantity_above_max_is_rejected(cart):
+        r = cart.add_item({"id": SIMPLE_PRODUCT_ID, "quantity": MAX_QUANTITY + 1})
+>       assert r.status_code == 400
+E       assert 201 == 400
+E        +  where 201 = <Response [201]>.status_code
+
+test_cart_add_item.py:88: AssertionError
+__________________ test_add_with_decimal_quantity_is_rejected __________________
+
+cart = <conftest.StoreCart object at 0x1075fcf50>
+
+    def test_add_with_decimal_quantity_is_rejected(cart):
+        r = cart.add_item({"id": SIMPLE_PRODUCT_ID, "quantity": 2.5})
+>       assert r.status_code == 400
+E       assert 201 == 400
+E        +  where 201 = <Response [201]>.status_code
+
+test_cart_add_item.py:95: AssertionError
+_________________ test_update_to_decimal_quantity_is_rejected __________________
+
+cart_with_item = (<conftest.StoreCart object at 0x1075e3540>, {'id': 16, 'name': 'Cap', 'slug': 'cap', 'parent': 0, ...}, 'c74d97b01eae257e44aa9d5bade97baf')
+
+    def test_update_to_decimal_quantity_is_rejected(cart_with_item):
+        cart, _, key = cart_with_item
+        r = cart.update_item({"key": key, "quantity": 2.7})
+>       assert r.status_code == 400
+E       assert 200 == 400
+E        +  where 200 = <Response [200]>.status_code
+
+test_cart_update_item.py:85: AssertionError
+_______________ test_price_range_returns_every_product_in_range ________________
+
+session = <requests.sessions.Session object at 0x1076ed440>
+all_products = [{'id': 33, 'name': 'WordPress Pennant', 'slug': 'wordpress-pennant', 'parent': 0, ...}, {'id': 32, 'name': 'Logo Coll...e': 'Single', 'slug': 'single', 'parent': 0, ...}, {'id': 22, 'name': 'Album', 'slug': 'album', 'parent': 0, ...}, ...]
+
+    def test_price_range_returns_every_product_in_range(session, all_products):
+        low, high = 1000, 2000
+        r = list_products(session, min_price=low, max_price=high, per_page=100)
+        assert r.status_code == 200
+        returned = {p["id"] for p in r.json()}
+        expected = {p["id"] for p in all_products if low <= price_of(p) <= high}
+        assert all(low <= price_of(p) <= high for p in r.json())
+>       assert returned == expected
+E       AssertionError: assert {16, 22} == {10, 13, 14, 16, 21, 22, ...}
+E         
+E         Extra items in the right set:
+E         32
+E         33
+E         10
+E         13
+E         14...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+test_products_list.py:64: AssertionError
+_________________ test_price_negative_min_returns_all_products _________________
+
+session = <requests.sessions.Session object at 0x1076ee6d0>
+all_products = [{'id': 33, 'name': 'WordPress Pennant', 'slug': 'wordpress-pennant', 'parent': 0, ...}, {'id': 32, 'name': 'Logo Coll...e': 'Single', 'slug': 'single', 'parent': 0, ...}, {'id': 22, 'name': 'Album', 'slug': 'album', 'parent': 0, ...}, ...]
+
+    def test_price_negative_min_returns_all_products(session, all_products):
+        r = list_products(session, min_price=-100, per_page=100)
+        assert r.status_code == 200
+>       assert {p["id"] for p in r.json()} == {p["id"] for p in all_products}
+E       AssertionError: assert {15, 16, 22} == {10, 11, 12, 13, 14, 15, ...}
+E         
+E         Extra items in the right set:
+E         10
+E         11
+E         12
+E         13
+E         14...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+test_products_list.py:78: AssertionError
+____________________ test_price_non_numeric_min_is_rejected ____________________
+
+session = <requests.sessions.Session object at 0x1076eeba0>
+
+    def test_price_non_numeric_min_is_rejected(session):
+        r = list_products(session, min_price="abc")
+>       assert r.status_code == 400
+E       assert 500 == 400
+E        +  where 500 = <Response [500]>.status_code
+
+test_products_list.py:84: AssertionError
+_________________ test_order_by_price_is_sorted[C4-price-asc] __________________
+
+session = <requests.sessions.Session object at 0x1076eee60>, order = 'asc'
+
+    @pytest.mark.parametrize("order", ["asc", "desc"], ids=["C4-price-asc", "C4-price-desc"])
+    def test_order_by_price_is_sorted(session, order):
+        r = list_products(session, orderby="price", order=order, per_page=100, type="simple")
+        assert r.status_code == 200
+        prices = [price_of(p) for p in r.json()]
+>       assert prices == sorted(prices, reverse=(order == "desc"))
+E       AssertionError: assert [3500, 4500, ...00, 2000, ...] == [200, 1500, 1...00, 1800, ...]
+E         
+E         At index 0 diff: 3500 != 200
+E         
+E         Full diff: (-: missing in left side, +: extra in left side)
+E           [
+E         +     3500,
+E         +     4500,...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+test_products_list.py:119: AssertionError
+_________________ test_order_by_price_is_sorted[C4-price-desc] _________________
+
+session = <requests.sessions.Session object at 0x1076ef8b0>, order = 'desc'
+
+    @pytest.mark.parametrize("order", ["asc", "desc"], ids=["C4-price-asc", "C4-price-desc"])
+    def test_order_by_price_is_sorted(session, order):
+        r = list_products(session, orderby="price", order=order, per_page=100, type="simple")
+        assert r.status_code == 200
+        prices = [price_of(p) for p in r.json()]
+>       assert prices == sorted(prices, reverse=(order == "desc"))
+E       AssertionError: assert [5500, 1600, ...00, 9000, ...] == [9000, 5500, ...00, 2500, ...]
+E         
+E         At index 0 diff: 5500 != 9000
+E         
+E         Full diff: (-: missing in left side, +: extra in left side)
+E           [
+E         +     5500,
+E         +     1600,...
+E         
+E         ...Full output truncated, use '-vv' to show
+
+test_products_list.py:119: AssertionError
+- generated xml file: /Users/naruepon/Desktop/QA_ProjectPhrase2/project phase 2/API testing/results/junit-20261103-1359.xml -
+- Generated html report: file:///Users/naruepon/Desktop/QA_ProjectPhrase2/project%20phase%202/API%20testing/results/report-20261103-1359.html -
+=========================== short test summary info ============================
+FAILED test_cart_add_item.py::test_add_with_quantity_above_max_is_rejected - ...
+FAILED test_cart_add_item.py::test_add_with_decimal_quantity_is_rejected - as...
+FAILED test_cart_update_item.py::test_update_to_decimal_quantity_is_rejected
+FAILED test_products_list.py::test_price_range_returns_every_product_in_range
+FAILED test_products_list.py::test_price_negative_min_returns_all_products - ...
+FAILED test_products_list.py::test_price_non_numeric_min_is_rejected - assert...
+FAILED test_products_list.py::test_order_by_price_is_sorted[C4-price-asc] - A...
+FAILED test_products_list.py::test_order_by_price_is_sorted[C4-price-desc] - ...
+======================== 8 failed, 38 passed in 22.09s =========================
